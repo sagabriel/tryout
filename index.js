@@ -27,19 +27,25 @@
   const PubSub = require(`@google-cloud/pubsub`);
   // Creates a client
   const pubsub = new PubSub();
-
-function listSubscriptions() {
-  // Lists all subscriptions in the current project
+  var topic = prompt("From what topic you want to list all the subscriptions?");
+exports.listSubscriptions = (req, res) => {
+  if (req.body.topic === undefined) {
+    res.status(400).send('No Topic defined!');
+    } 
+  else {
+    // Everything is ok
   pubsub
-    .getSubscriptions()
-    .then(results => {
-      const subscriptions = results[0];
-
-      console.log('Subscriptions:');
-      subscriptions.forEach(subscription => console.log(subscription.name));
-    })
-    .catch(err => {
-      console.error('ERROR:', err);
-    });
-  // [END pubsub_list_subscriptions]
+  .topic(topic)
+  .getSubscriptions()
+  .then(results => {
+    const subscriptions = results[0];
+    console.log(`Subscriptions for ${topicName}:`);
+    subscriptions.forEach(subscription => console.log(subscription.name));
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });
+  console.log(req.body.topic);
+  res.status(200).end();
+  }
 }
