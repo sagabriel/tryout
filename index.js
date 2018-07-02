@@ -20,15 +20,12 @@
  * For more information, see the README.md under /pubsub and the documentation
  * at https://cloud.google.com/pubsub/docs.
  */
-
-'use strict';
-  // [START pubsub_list_subscriptions]
-  // Imports the Google Cloud client library
-  const PubSub = require(`@google-cloud/pubsub`);
-  // Creates a client
-  const pubsub = new PubSub();
-  var topic = prompt("From what topic you want to list all the subscriptions?");
 exports.listSubscriptions = (req, res) => {
+  'use strict';
+  const PubSub = require(`@google-cloud/pubsub`);
+  const pubsub = new PubSub();
+  
+  var topic = prompt("From what topic you want to list all the subscriptions?");
   if (req.body.topic === undefined) {
     res.status(400).send('No Topic defined!');
     } 
@@ -45,7 +42,7 @@ exports.listSubscriptions = (req, res) => {
   .catch(err => {
     console.error('ERROR:', err);
   });
-  console.log(req.body.topic);
+  // console.log(req.body.topic);
   res.status(200).end();
   }
 }
