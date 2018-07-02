@@ -1,5 +1,5 @@
 // Imports the Google Cloud client library
-exports.tryout=function(){
+exports.f=function(){
 const PubSub = require('@google-cloud/pubsub');
 
 // Your Google Cloud Platform project ID
@@ -23,4 +23,4 @@ pubsubClient
   .catch(err => {
     console.error('ERROR:', err);
   });
-}
+};
